@@ -28,14 +28,14 @@ export class UsersController {
     return 'hello world'
   }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
+  @Get('all')
+  async findAll(): Promise<Users[]> {
+    return await this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  @Get('single/:id')
+  async findOne(@Param('id') id: string): Promise<Users> {
+    return await this.usersService.findOne(+id);
   }
 
   @Patch(':id')
