@@ -1,4 +1,4 @@
-import { UserRole } from 'src/utility/common/user-roles.enum';
+import { Roles } from 'src/utility/common/user-roles.enum';
 import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
 
 @Entity()
@@ -18,8 +18,8 @@ export class Users {
     @Column()
     lastName: string;
 
-    @Column({ type: 'enum', enum: UserRole, array:true, default: [UserRole.CUSTOMER]})
-    roles: UserRole[];
+    @Column({ type: 'enum', enum: Roles, array:true, default: [Roles.CUSTOMER]})
+    roles: Roles[];
 
     @CreateDateColumn()
     createdAt: Date;
