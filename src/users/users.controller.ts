@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserSignUpDto } from './dto/user-signup.dto';
-import { Users } from './entities/user.entity';
+import { UserEntity } from './entities/user.entity';
 import { UserSignInDto } from './dto/user-signin.dto';
 import { CurrentUser } from 'src/utility/decorators/current-user.decorator';
 import { AuthenticationGuard } from 'src/utility/guards/authentication.gaurd';
@@ -16,26 +16,25 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('signup')
-  async signup(@Body() userSignUp: UserSignUpDto): Promise<{user: Users}> {
+  async signup(@Body() userSignUp: UserSignUpDto): Promise<{user: UserEntity}> {
     return {user: await this.usersService.signup(userSignUp)};
   }
 
   @Post('signin')
-  async signin(@Body() userSignUp: UserSignInDto): Promise<{user: Users, token: string}> {
+  async signin(@Body() userSignUp: UserSignInDto): Promise<{user: UserEntity, token: string}> {
     const user = await this.usersService.signin(userSignUp);
     const token = await this.usersService.generateToken(user);
     return {user, token};
   }
 
-  // @AuthorizeRoles(Roles.ADMIN)
   @UseGuards(AuthenticationGuard, AuthorizeGuard([Roles.ADMIN]))
   @Get('all')
-  async findAll(): Promise<Users[]> {
+  async findAll(): Promise<UserEntity[]> {
     return await this.usersService.findAll();
   }
 
   @Get('single/:id')
-  async findOne(@Param('id') id: string): Promise<Users> {
+  async findOne(@Param('id') id: string): Promise<UserEntity> {
     return await this.usersService.findOne(+id);
   }
 
@@ -51,7 +50,7 @@ export class UsersController {
 
   @UseGuards(AuthenticationGuard)
   @Get('me')
-  getProfile(@CurrentUser() currentUser: Users) {
+  getProfile(@CurrentUser() currentUser: UserEntity) {
     return currentUser;
   }
 }

@@ -3,12 +3,12 @@ import { isArray } from 'class-validator';
 import { verify } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { UsersService } from 'src/users/users.service';
-import { Users } from 'src/users/entities/user.entity';
+import { UserEntity } from 'src/users/entities/user.entity';
 
 declare global {
     namespace Express {
         interface Request {
-            currentUser?: Users;
+            currentUser?: UserEntity;
         }
     }
 }

@@ -1,8 +1,9 @@
+import { CategoryEntity } from 'src/categories/entities/category.entity';
 import { Roles } from 'src/utility/common/user-roles.enum';
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
 
-@Entity()
-export class Users {
+@Entity('users')
+export class UserEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -26,4 +27,7 @@ export class Users {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(() => CategoryEntity, (category) => category.addedBy)
+    categories: CategoryEntity[];
 }

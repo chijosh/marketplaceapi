@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from './entities/user.entity';
+import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { UserSignUpDto } from './dto/user-signup.dto';
 import {hash, compare} from 'bcrypt'
@@ -12,11 +12,11 @@ import { sign } from 'jsonwebtoken';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(Users)
-    private usersRepository: Repository<Users>,
+    @InjectRepository(UserEntity)
+    private usersRepository: Repository<UserEntity>,
   ) {}
 
-  async signup(userSignUp: UserSignUpDto): Promise<Users> {
+  async signup(userSignUp: UserSignUpDto): Promise<UserEntity> {
     const userExists = await this.findUserByEmail(userSignUp.email);
     if (userExists) {
       throw new BadRequestException('Email is not available');
@@ -28,7 +28,7 @@ export class UsersService {
     return user;
   }
 
-  async signin(userSignIn: UserSignInDto): Promise<Users> {
+  async signin(userSignIn: UserSignInDto): Promise<UserEntity> {
     const userExists = await this.usersRepository.createQueryBuilder('user').addSelect('user.password').where('user.email = :email', {email: userSignIn.email}).getOne();
     if (!userExists) {
       throw new BadRequestException('Email or password is incorrect');
@@ -45,11 +45,11 @@ export class UsersService {
     return 'This action adds a new user';
   }
 
-  async findAll(): Promise<Users[]> {
+  async findAll(): Promise<UserEntity[]> {
     return await this.usersRepository.find();
   }
 
-  async findOne(id: number): Promise<Users> {
+  async findOne(id: number): Promise<UserEntity> {
     const user = await this.usersRepository.findOneBy({id});
     if (!user) {
       throw new NotFoundException('No user found');
@@ -65,11 +65,11 @@ export class UsersService {
     return `This action removes a #${id} user`;
   }
 
-  async findUserByEmail(email: string): Promise<Users | undefined> {
+  async findUserByEmail(email: string): Promise<UserEntity | undefined> {
     return await this.usersRepository.findOneBy({email});
   }
 
-  async generateToken(user: Users): Promise<string> {
+  async generateToken(user: UserEntity): Promise<string> {
     return sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_SECRET_EXPIRE_TIME});
   }
 }
