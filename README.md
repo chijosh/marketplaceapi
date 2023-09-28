@@ -1,7 +1,15 @@
 # Marketplace API
 
-[![Build Status](https://travis-ci.com/yourusername/marketplace-api.svg?branch=main)](https://travis-ci.com/yourusername/marketplace-api)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+- _View Finished live REST API:_ [https://marketplace-api-09mi.onrender.com/api]
+- _Technologies Used:_
+  - NestJs,
+  - PostgreSQL,
+  - TypeORM,
+  - TypeScript
+  - Swagger
+
+# Project Documentation
+
 <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
