@@ -1,0 +1,72 @@
+name: Continuous Integration and Deployment
+
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout and Setup Node
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      - name: Get node version
+        id: node-version
+        run: |
+          echo "::set-output name=version::$(node -v)"
+
+      - name: Get node_modules cache
+        uses: actions/cache@v2
+        id: node_modules
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}-${{ steps.node-version.outputs.version }}
+
+      - run: npm install
+
+      - name: Run tests
+        run: npm run test
+
+  run-prettier-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout and Setup Node
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      - name: Get node version
+        id: node-version
+        run: |
+          echo "::set-output name=version::$(node -v)"
+
+      - name: Get node_modules cache
+        uses: actions/cache@v2
+        id: node_modules
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}-${{ steps.node-version.outputs.version }}
+
+      - run: npm install
+
+      - name: run lint
+        run: npm run lint
+
+      - name: run prettier
+        run: npm run prettier
