@@ -1,30 +1,34 @@
+# Marketplace API
+
+[![Build Status](https://travis-ci.com/yourusername/marketplace-api.svg?branch=main)](https://travis-ci.com/yourusername/marketplace-api)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
 <a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+The Marketplace API is a comprehensive e-commerce API that provides endpoints for user management, product listings, order processing, product categories, and reviews.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Table of Contents
+
+- [About](#about)
+- [Features](#features)
+- [Installation](#installation)
+- [API Documentation](#api-documentation)
+
+
+## About
+
+The Marketplace API serves as the backend for an e-commerce platform. It allows you to manage users, list and search for products, process orders, organize products into categories, and gather reviews and ratings.
+
+## Features
+
+- User Management: Register, login, and manage user profiles.
+- Product Listings: Create, update, and delete product listings.
+- Order Processing: Place orders, view order history, and manage orders.
+- Product Categories: Organize products into categories for easy navigation.
+- Reviews and Ratings: Gather and display product reviews and ratings.
 
 ## Installation
 
@@ -68,16 +72,22 @@ $ npm run migration:generate -- db/migrations/initial
 $ npm run migration:run
 ```
 
-## Support
+## API Documentation
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Explore the API endpoints and their documentation using Swagger:
 
-## Stay in touch
+- **[API Documentation (Swagger)](https://marketplace-api-09mi.onrender.com/api)**
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Swagger provides an interactive interface for testing and exploring the API. You can use it to understand the available endpoints, make sample requests, and view responses.
 
-## License
+For quick reference, here are some of the key API endpoints:
 
-Nest is [MIT licensed](LICENSE).
+- **User Registration:** Create a new user account.
+- **User Login:** Authenticate and obtain an access token.
+- **Product Listings:** View, create, and manage product listings.
+- **Order Processing:** Place orders, view order history, and manage orders.
+- **Product Categories:** Explore and filter products by category.
+- **Reviews and Ratings:** Read and submit product reviews and ratings.
+
+Make sure to refer to the [API Documentation (Swagger)](https://marketplace-api-09mi.onrender.com/api) for detailed information, request examples, and response schemas.
+
