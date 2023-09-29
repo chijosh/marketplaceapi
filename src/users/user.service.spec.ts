@@ -4,6 +4,7 @@ import { UserEntity } from './entities/user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class MockRepository<T> {
   create = jest.fn();
   save = jest.fn();
@@ -43,7 +44,7 @@ describe('UsersService', () => {
 
     const user: Partial<UserEntity> = {
       email: userSignUpDto.email,
-      password: '', 
+      password: '',
       firstName: userSignUpDto.firstName,
       lastName: userSignUpDto.lastName,
     };

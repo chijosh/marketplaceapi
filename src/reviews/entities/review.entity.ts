@@ -27,9 +27,9 @@ export class ReviewEntity {
   @UpdateDateColumn()
   updatedAt: Timestamp;
 
-  @ManyToOne((type) => UserEntity, (user) => user.reviews)
+  @ManyToOne(() => UserEntity, (user) => user.reviews)
   user: UserEntity;
 
-  @ManyToOne((type) => ProductEntity, (product) => product.reviews)
+  @ManyToOne(() => ProductEntity, (product) => product.reviews)
   product: ProductEntity;
 }

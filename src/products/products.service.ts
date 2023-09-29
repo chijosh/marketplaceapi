@@ -42,7 +42,6 @@ export class ProductsService {
   async findAll(
     query: any,
   ): Promise<{ products: any[]; totalProducts; limit }> {
-    let filteredTotalProducts: number;
     let limit: number;
 
     if (!query.limit) {

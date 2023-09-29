@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { ReviewsController } from './reviews.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductEntity } from 'src/products/entities/product.entity';
 import { ProductsModule } from 'src/products/products.module';
 import { ReviewEntity } from './entities/review.entity';
 

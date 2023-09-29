@@ -6,7 +6,6 @@ import {
   forwardRef,
 } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { OrderEntity } from './entities/order.entity';
 import { Repository } from 'typeorm';
@@ -42,7 +41,7 @@ export class OrdersService {
 
     const orderTbl = await this.orderRepository.save(orderEntity);
 
-    let opEntity: {
+    const opEntity: {
       order: OrderEntity;
       product: ProductEntity;
       product_quantity: number;
@@ -61,12 +60,12 @@ export class OrdersService {
       opEntity.push({ order, product, product_quantity, product_unit_price });
     }
 
-    const op = await this.opRepository
-      .createQueryBuilder()
-      .insert()
-      .into(OrdersProductsEntity)
-      .values(opEntity)
-      .execute();
+    // const op = await this.opRepository
+    //   .createQueryBuilder()
+    //   .insert()
+    //   .into(OrdersProductsEntity)
+    //   .values(opEntity)
+    //   .execute();
 
     return await this.findOne(orderTbl.id);
   }

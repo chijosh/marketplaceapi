@@ -8,7 +8,6 @@ import {
   Delete,
   UseGuards,
   Query,
-  UseInterceptors,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -20,10 +19,7 @@ import { CurrentUser } from 'src/utility/decorators/current-user.decorator';
 import { UserEntity } from 'src/users/entities/user.entity';
 import { ProductEntity } from './entities/product.entity';
 import { ApiTags } from '@nestjs/swagger';
-import {
-  SerializeIncludes,
-  SerializeInterceptor,
-} from 'src/utility/interceptors/serialize.interceptor';
+import { SerializeIncludes } from 'src/utility/interceptors/serialize.interceptor';
 import { ProductsDto } from './dto/products.dto';
 
 @ApiTags('products')
