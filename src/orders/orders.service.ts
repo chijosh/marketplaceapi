@@ -25,7 +25,8 @@ export class OrdersService {
     private readonly orderRepository: Repository<OrderEntity>,
     @InjectRepository(OrdersProductsEntity)
     private readonly opRepository: Repository<OrdersProductsEntity>,
-    @Inject(forwardRef(()=> ProductsService)) private readonly productService: ProductsService,
+    @Inject(forwardRef(() => ProductsService))
+    private readonly productService: ProductsService,
   ) {}
 
   async create(
@@ -96,14 +97,14 @@ export class OrdersService {
       relations: {
         product: true,
       },
-      where: {product: {id}}
-    })
+      where: { product: { id } },
+    });
   }
 
   async update(
     id: number,
     updateOrderStatusDto: UpdateOrderStatusDto,
-    currentUser: UserEntity
+    currentUser: UserEntity,
   ) {
     let order = await this.findOne(id);
 
@@ -152,10 +153,10 @@ export class OrdersService {
   }
 
   async cancelled(id: number, currentUser: UserEntity) {
-    let order = await this.findOne(id)
+    let order = await this.findOne(id);
 
-    if(!order) {
-      throw new NotFoundException('Order now found')
+    if (!order) {
+      throw new NotFoundException('Order now found');
     }
 
     if (order.status === OrderStatus.CANCELLED) {
@@ -164,8 +165,8 @@ export class OrdersService {
 
     order.status = OrderStatus.CANCELLED;
     order.updateBy = currentUser;
-    order = await this.orderRepository.save(order)
-    await this.stockUpdate(order, OrderStatus.CANCELLED)
+    order = await this.orderRepository.save(order);
+    await this.stockUpdate(order, OrderStatus.CANCELLED);
 
     return order;
   }
@@ -184,4 +185,3 @@ export class OrdersService {
     }
   }
 }
-

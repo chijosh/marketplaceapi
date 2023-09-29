@@ -9,15 +9,27 @@ import { ProductsService } from 'src/products/products.service';
 
 @Injectable()
 export class ReviewsService {
-  constructor(@InjectRepository(ReviewEntity) private readonly reviewRepository: Repository<ReviewEntity>, private readonly productService: ProductsService){}
+  constructor(
+    @InjectRepository(ReviewEntity)
+    private readonly reviewRepository: Repository<ReviewEntity>,
+    private readonly productService: ProductsService,
+  ) {}
 
-  async create(createReviewDto: CreateReviewDto, currentUser: UserEntity): Promise<ReviewEntity> {
-    const product = await this.productService.findOne(createReviewDto.productId);
-    
-    let review = await this.findOneByUserAndProduct(currentUser.id, createReviewDto.productId)
-    
-    if(!review){
-      review = this.reviewRepository.create(createReviewDto)
+  async create(
+    createReviewDto: CreateReviewDto,
+    currentUser: UserEntity,
+  ): Promise<ReviewEntity> {
+    const product = await this.productService.findOne(
+      createReviewDto.productId,
+    );
+
+    let review = await this.findOneByUserAndProduct(
+      currentUser.id,
+      createReviewDto.productId,
+    );
+
+    if (!review) {
+      review = this.reviewRepository.create(createReviewDto);
       review.user = currentUser;
       review.product = product;
     } else {
@@ -25,24 +37,24 @@ export class ReviewsService {
       review.ratings = createReviewDto.ratings;
     }
 
-     return await this.reviewRepository.save(review);
+    return await this.reviewRepository.save(review);
   }
 
   async findAll() {
-    return await this.reviewRepository.find()
+    return await this.reviewRepository.find();
   }
 
   async findAllByProduct(id: number): Promise<ReviewEntity[]> {
     const product = await this.productService.findOne(id);
     return await this.reviewRepository.find({
-      where: {product: {id}},
+      where: { product: { id } },
       relations: {
         user: true,
         product: {
-          category: true
-        }
-      }
-    })
+          category: true,
+        },
+      },
+    });
   }
 
   async findOne(id: number): Promise<ReviewEntity> {
@@ -51,12 +63,12 @@ export class ReviewsService {
       relations: {
         user: true,
         product: {
-          category: true
-        }
-      }
-    })
-    if(!review) {
-      throw new NotFoundException('Review not found')
+          category: true,
+        },
+      },
+    });
+    if (!review) {
+      throw new NotFoundException('Review not found');
     }
     return review;
   }
@@ -68,25 +80,25 @@ export class ReviewsService {
   async remove(id: number) {
     const review = await this.findOne(id);
 
-    return this.reviewRepository.remove(review)
+    return this.reviewRepository.remove(review);
   }
 
   async findOneByUserAndProduct(userId: number, productId: number) {
     return await this.reviewRepository.findOne({
       where: {
         user: {
-          id: userId
+          id: userId,
         },
         product: {
-          id: productId
+          id: productId,
         },
       },
       relations: {
         user: true,
         product: {
-          category: true
-        }
-      }
-    })
+          category: true,
+        },
+      },
+    });
   }
 }

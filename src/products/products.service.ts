@@ -1,4 +1,10 @@
-import { BadRequestException, Inject, Injectable, NotFoundException, forwardRef } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+  forwardRef,
+} from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -16,7 +22,8 @@ export class ProductsService {
     @InjectRepository(ProductEntity)
     private readonly productRepository: Repository<ProductEntity>,
     private readonly categoryService: CategoriesService,
-    @Inject(forwardRef(()=> OrdersService)) private readonly orderService: OrdersService
+    @Inject(forwardRef(() => OrdersService))
+    private readonly orderService: OrdersService,
   ) {}
 
   async create(
@@ -32,7 +39,9 @@ export class ProductsService {
     return await this.productRepository.save(product);
   }
 
-  async findAll(query: any): Promise<{products: any[], totalProducts, limit}> {
+  async findAll(
+    query: any,
+  ): Promise<{ products: any[]; totalProducts; limit }> {
     let filteredTotalProducts: number;
     let limit: number;
 
@@ -96,7 +105,7 @@ export class ProductsService {
 
     const products = await queryBuilder.getRawMany();
 
-    return {products, totalProducts, limit};
+    return { products, totalProducts, limit };
   }
 
   async findOne(id: number) {
@@ -144,12 +153,12 @@ export class ProductsService {
   }
 
   async remove(id: number) {
-    const product = await this.findOne(id)
-    const order = await this.orderService.findOneByProductId(product.id)
+    const product = await this.findOne(id);
+    const order = await this.orderService.findOneByProductId(product.id);
 
-    console.log({order});
-    
-    if(order) throw new BadRequestException('Products in in use')
+    console.log({ order });
+
+    if (order) throw new BadRequestException('Products in in use');
     return await this.productRepository.remove(product);
   }
 

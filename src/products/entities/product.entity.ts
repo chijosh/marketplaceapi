@@ -1,44 +1,53 @@
-import { CategoryEntity } from "src/categories/entities/category.entity";
-import { OrdersProductsEntity } from "src/orders/entities/order-products.entity";
-import { ReviewEntity } from "src/reviews/entities/review.entity";
-import { UserEntity } from "src/users/entities/user.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { CategoryEntity } from 'src/categories/entities/category.entity';
+import { OrdersProductsEntity } from 'src/orders/entities/order-products.entity';
+import { ReviewEntity } from 'src/reviews/entities/review.entity';
+import { UserEntity } from 'src/users/entities/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Timestamp,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Entity({ name: 'products'})
+@Entity({ name: 'products' })
 export class ProductEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string;
-    
-    @Column()
-    description: string;
+  @Column()
+  name: string;
 
-    @Column({ type: 'decimal', precision: 10, scale: 2, default: 0})
-    price: number;
+  @Column()
+  description: string;
 
-    @Column()
-    stock: number;
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  price: number;
 
-    @Column('simple-array')
-    images: string[];
+  @Column()
+  stock: number;
 
-    @CreateDateColumn()
-    createdAt: Timestamp;
+  @Column('simple-array')
+  images: string[];
 
-    @UpdateDateColumn()
-    updatedAt: Timestamp;
+  @CreateDateColumn()
+  createdAt: Timestamp;
 
-    @ManyToOne(() => UserEntity, (user) => user.products)
-    addedBy: UserEntity;
+  @UpdateDateColumn()
+  updatedAt: Timestamp;
 
-    @ManyToOne(()=> CategoryEntity, (category) => category.products)
-    category: CategoryEntity;
+  @ManyToOne(() => UserEntity, (user) => user.products)
+  addedBy: UserEntity;
 
-    @OneToMany(() => ReviewEntity, (review) => review.product)
-    reviews: ReviewEntity;
+  @ManyToOne(() => CategoryEntity, (category) => category.products)
+  category: CategoryEntity;
 
-    @OneToMany(() => OrdersProductsEntity, (op) => op.product)
-    products: OrdersProductsEntity[];
+  @OneToMany(() => ReviewEntity, (review) => review.product)
+  reviews: ReviewEntity;
+
+  @OneToMany(() => OrdersProductsEntity, (op) => op.product)
+  products: OrdersProductsEntity[];
 }

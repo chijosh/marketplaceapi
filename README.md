@@ -25,7 +25,6 @@ The Marketplace API is a comprehensive e-commerce API that provides endpoints fo
 - [Installation](#installation)
 - [API Documentation](#api-documentation)
 
-
 ## About
 
 The Marketplace API serves as the backend for an e-commerce platform. It allows you to manage users, list and search for products, process orders, organize products into categories, and gather reviews and ratings.
@@ -98,4 +97,3 @@ For quick reference, here are some of the key API endpoints:
 - **Reviews and Ratings:** Read and submit product reviews and ratings.
 
 Make sure to refer to the [API Documentation (Swagger)](https://marketplace-api-09mi.onrender.com/api) for detailed information, request examples, and response schemas.
-

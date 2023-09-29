@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
@@ -17,7 +26,10 @@ export class ReviewsController {
 
   @UseGuards(AuthenticationGuard)
   @Post()
-  async create(@Body() createReviewDto: CreateReviewDto, @CurrentUser() currentUser: UserEntity): Promise<ReviewEntity> {
+  async create(
+    @Body() createReviewDto: CreateReviewDto,
+    @CurrentUser() currentUser: UserEntity,
+  ): Promise<ReviewEntity> {
     return await this.reviewsService.create(createReviewDto, currentUser);
   }
 
@@ -28,7 +40,7 @@ export class ReviewsController {
 
   @Get()
   async findAllByProduct(@Body('productId') productId: number) {
-    return await this.reviewsService.findAllByProduct(+productId)
+    return await this.reviewsService.findAllByProduct(+productId);
   }
 
   @Get(':id')
@@ -37,7 +49,10 @@ export class ReviewsController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateReviewDto: UpdateReviewDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateReviewDto: UpdateReviewDto,
+  ) {
     return await this.reviewsService.update(+id, updateReviewDto);
   }
 

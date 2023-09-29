@@ -1,28 +1,35 @@
-import { ProductEntity } from "src/products/entities/product.entity";
-import { UserEntity } from "src/users/entities/user.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { ProductEntity } from 'src/products/entities/product.entity';
+import { UserEntity } from 'src/users/entities/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Timestamp,
+  UpdateDateColumn,
+} from 'typeorm';
 
-
-@Entity({name: 'reviews'})
+@Entity({ name: 'reviews' })
 export class ReviewEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    ratings: number;
-    
-    @Column()
-    comment: string;
+  @Column()
+  ratings: number;
 
-    @CreateDateColumn()
-    createdAt: Timestamp;
+  @Column()
+  comment: string;
 
-    @UpdateDateColumn()
-    updatedAt: Timestamp;
+  @CreateDateColumn()
+  createdAt: Timestamp;
 
-    @ManyToOne(type => UserEntity, (user) => user.reviews)
-    user: UserEntity;
+  @UpdateDateColumn()
+  updatedAt: Timestamp;
 
-    @ManyToOne(type => ProductEntity, (product) => product.reviews)
-    product: ProductEntity;
+  @ManyToOne((type) => UserEntity, (user) => user.reviews)
+  user: UserEntity;
+
+  @ManyToOne((type) => ProductEntity, (product) => product.reviews)
+  product: ProductEntity;
 }

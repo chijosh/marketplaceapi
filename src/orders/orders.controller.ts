@@ -61,12 +61,11 @@ export class OrdersController {
   @UseGuards(AuthenticationGuard, AuthorizeGuard([Roles.ADMIN]))
   @Put('cancel/:id')
   async cancelled(
-    @Param('id') id: string, 
-    @CurrentUser() currentUser: UserEntity
-    ){
-      return await this.ordersService.cancelled(+id, currentUser)
-    }
-
+    @Param('id') id: string,
+    @CurrentUser() currentUser: UserEntity,
+  ) {
+    return await this.ordersService.cancelled(+id, currentUser);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

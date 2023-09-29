@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -18,15 +27,19 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('signup')
-  async signup(@Body() userSignUp: UserSignUpDto): Promise<{user: UserEntity}> {
-    return {user: await this.usersService.signup(userSignUp)};
+  async signup(
+    @Body() userSignUp: UserSignUpDto,
+  ): Promise<{ user: UserEntity }> {
+    return { user: await this.usersService.signup(userSignUp) };
   }
 
   @Post('signin')
-  async signin(@Body() userSignUp: UserSignInDto): Promise<{user: UserEntity, token: string}> {
+  async signin(
+    @Body() userSignUp: UserSignInDto,
+  ): Promise<{ user: UserEntity; token: string }> {
     const user = await this.usersService.signin(userSignUp);
     const token = await this.usersService.generateToken(user);
-    return {user, token};
+    return { user, token };
   }
 
   @UseGuards(AuthenticationGuard, AuthorizeGuard([Roles.ADMIN]))
